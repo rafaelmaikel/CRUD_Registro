@@ -37,8 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'CRUD_Registro'
+    'CRUD_Registro',
+    'crispy_forms',        # <— adicione isto
+    'crispy_bootstrap5',   # <— se for usar Bootstrap 5; ou crispy_bootstrap4 para Bootstrap 4
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = ["bootstrap5"]
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
