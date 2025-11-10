@@ -1,0 +1,150 @@
+{% extends "CRUD_Registro/base.html" %}
+
+{% block content %}
+<h2>Departamentos</h2>
+<a href="{% url 'departamento_create' %}" class="btn btn-primary mb-3">Novo departamento</a>
+
+<div class="scroll-list-container">
+    <div class="scroll-list no-scrollbar">
+        {% for departamento in departamentos %}
+        <div class="item">
+            <p class="item-text">{{ departamento.nome }} ({{ departamento.sigla }})</p>
+            <span class="actions">
+                <a href="{% url 'departamento_update' departamento.id %}" class="btn btn-sm btn-info">Editar</a>
+                <a href="{% url 'departamento_delete' departamento.id %}" class="btn btn-sm btn-danger">Excluir</a>
+            </span>
+        </div>
+        {% empty %}
+        <p class="text-light">Nenhum departamento cadastrado.</p>
+        {% endfor %}
+    </div>
+    <div class="top-gradient"></div>
+    <div class="bottom-gradient"></div>
+</div>
+
+<!-- Blob effect -->
+<div class="blob-container">
+    <div class="blob-main">
+        <div class="blob">
+            <div class="inner-dot"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Utilize o mesmo CSS do cargo_list.html para consistência */
+.scroll-list-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+.scroll-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 16px;
+}
+.scroll-list::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll-list::-webkit-scrollbar-track {
+  background: #060010;
+}
+.scroll-list::-webkit-scrollbar-thumb {
+  background: #271e37;
+  border-radius: 4px;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.item {
+  padding: 16px;
+  background-color: #170d27;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item.selected {
+  background-color: #271e37;
+}
+.item-text {
+  color: white;
+  margin: 0;
+}
+.actions a.btn {
+  margin-left: 8px;
+}
+.top-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: linear-gradient(to bottom, #060010, transparent);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.bottom-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to top, #060010, transparent);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.blob-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.blob-main {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+  cursor: default;
+}
+.blob {
+  position: absolute;
+  will-change: transform;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(200, 100, 255, 0.2);
+  mix-blend-mode: difference;
+}
+.inner-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+}
+</style>
+
+<script>
+// Reutiliza o script do cargo_list para mover o blob conforme o cursor
+document.addEventListener('mousemove', function(e) {
+  const blob = document.querySelector('.blob');
+  if (blob) {
+    blob.style.left = e.clientX + 'px';
+    blob.style.top = e.clientY + 'px';
+  }
+});
+</script>
+
+{% endblock content %}
