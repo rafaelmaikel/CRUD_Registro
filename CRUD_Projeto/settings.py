@@ -81,14 +81,13 @@ WSGI_APPLICATION = 'CRUD_Projeto.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "CRUD_DB",
-        "USER": "postgres",
-        "PASSWORD": "Mariafernanda0055",
-        "HOST": "localhost"
+        "NAME": "crud_db",          # ou o nome que você usou
+        "USER": "rafae",
+        "HOST": "localhost",
+        "PORT": "5433",
+        "OPTIONS": {"client_encoding": "UTF8"},
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
